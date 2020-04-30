@@ -4,12 +4,10 @@
        <div class="cocktail-show-card">
         <h1><%= @cocktail.name %></h1>
         <p>
-          <% @cocktail.doses.each do |dose| %>
-            <%  if @cocktail.photo.attached? %>
-              <%= cl_image_tag @cocktail.photo.key, height: 200, width:300, crop: :fill%>
-            <% else %>
+          <% if @cocktail.photo.attached? %>
+            <%= cl_image_tag @cocktail.photo.key, height: 200, width:300, crop: :fill%>
+          <% else %>
               <%= " " %>
-            <% end %>
           <% end %>
        </p>
 
@@ -30,6 +28,10 @@
 
 <%= link_to 'Volte para a lista de cocktails', cocktails_path, class: "btn btn-primary"  %>
 <%= link_to 'Adicione doses',  new_cocktail_dose_path(@cocktail), class: "btn btn-primary"  %>
+<%= link_to "Remove cocktail", cocktail_path(@cocktail),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" },
+                  class: "btn btn-primary" %>
 
 
 
